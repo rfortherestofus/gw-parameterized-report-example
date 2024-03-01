@@ -1,0 +1,30 @@
+---
+title: "Report on Life Expectancy"
+format: html
+execute: 
+  echo: false
+  warning: false
+  message: false
+params:
+  country: Afghanistan
+---
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+```{r}
+gapminder_filtered <-
+  gapminder |> 
+  filter(country == params$country)
+```
+
+```{r}
+ggplot(data = gapminder_filtered,
+       aes(x = year,
+           y = lifeExp,
+           group = country)) +
+  geom_line() +
+  theme_minimal()
+```
